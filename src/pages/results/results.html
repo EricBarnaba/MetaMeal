@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>results</ion-title>
+    <ion-title>Restaurants Near You</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card *ngFor = "let r of resultList">
+          <img [src]="r.picture"/>
+          <ion-card-content>
+            <ion-card-title>
+              {{r.rating}}     {{r.name}}
+            </ion-card-title>
+            <p>{{r.price}}     {{r.cuisine}}</p>
+            <br>
+            <p>{{r.address}}     {{r.phone}}</p>
+            <br>
+            <p>{{r.city}}     {{r.distance}}</p>
+          </ion-card-content>
+  </ion-card>
 </ion-content>

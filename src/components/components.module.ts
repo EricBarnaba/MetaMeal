@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ResultCardComponent } from './result-card/result-card';
+
 @NgModule({
-	declarations: [ResultCardComponent],
+	declarations: [],
 	imports: [],
-	exports: [ResultCardComponent]
+	exports: []
 })
 export class ComponentsModule {}

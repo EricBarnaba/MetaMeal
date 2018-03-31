@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable'
+;
 /**
  * Generated class for the ResultsPage page.
  *
@@ -15,7 +17,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ResultsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  resultList: any; 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
+ 
+    this.resultList = [];
+  }
+
+  ngOnInit(){
+    this.getData();
+  }
+
+  getData(){
+    let url = "build/dummydata.json";
+    let data: Observable<any> = this.http.get(url)
+    data.subscribe(result =>{
+      this.resultList = result;
+      console.log(result);
+    })
   }
 
   ionViewDidLoad() {
