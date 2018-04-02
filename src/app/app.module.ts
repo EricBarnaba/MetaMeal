@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {HttpClientModule} from '@angular/common/http';
 import { ResultsPage } from '../pages/results/results';
+import { SearchProvider } from '../providers/search/search';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ResultsPage } from '../pages/results/results';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SearchProvider
   ]
 })
 export class AppModule {}
