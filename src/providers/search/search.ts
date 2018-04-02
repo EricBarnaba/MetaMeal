@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
+
 @Injectable()
 export class SearchProvider {
 
@@ -14,4 +16,10 @@ export class SearchProvider {
     console.log('Hello SearchProvider Provider');
   }
 
+  henlo():string {
+    return 'henlo';
+  }
+
 }
+
+

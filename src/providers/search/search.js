@@ -20,6 +20,9 @@ var SearchProvider = /** @class */ (function () {
         this.http = http;
         console.log('Hello SearchProvider Provider');
     }
+    SearchProvider.prototype.henlo = function () {
+        return 'henlo';
+    };
     SearchProvider = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [HttpClient])

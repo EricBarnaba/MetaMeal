@@ -35,4 +35,7 @@ import { SearchProvider } from '../providers/search/search';
     SearchProvider
   ]
 })
+
+
 export class AppModule {}
+
