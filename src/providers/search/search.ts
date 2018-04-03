@@ -1,5 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+
+import {Observable} from 'rxjs/Observable';
+import {HttpErrorResponse} from '@angular/common/http';
+import{catchError} from 'rxjs/operators';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 
 /*
   Generated class for the SearchProvider provider.
@@ -11,14 +17,36 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SearchProvider {
+  getUrl = 'https://jsonplaceholder.typicode.com/restaurants';
+  postUrl = 'https://jsonplaceholder.typicode.com/search';
 
-  constructor(public http: HttpClient) {
-    console.log('Hello SearchProvider Provider');
+  constructor(private http: HttpClient) {
+    //console.log('Hello SearchProvider Provider');
   }
 
-  henlo():string {
-    return 'henlo';
+  getData(){
+    const req = new HttpRequest('GET', this.getUrl, {
+      reportProgress: true
+    })
+    return this.http.request(req);
   }
+
+  postSearch(location: string, cuisine: string, radius: number) {
+    //let json = new SearchObject(location,cuisine,radius);
+    return this.http.post(this.postUrl, {location,cuisine,radius});
+
+  }
+
+  // private handleError(error: HttpErrorResponse) {
+  //   if(error.error instanceof ErrorEvent) {
+  //     console.error('Something weird is going on: ', error.error.message);
+  //   }
+  //   else{
+  //     console.error(`Server returned code ${error.status},` + `body was: ${error.error}`);
+  //   }
+  //   return new ErrorObservable('Something bad happened');
+
+  // }
 
 }
 

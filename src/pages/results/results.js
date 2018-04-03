@@ -9,7 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
+import { SearchProvider } from '../../providers/search/search';
 /**
  * Generated class for the ResultsPage page.
  *
@@ -17,22 +18,39 @@ import { HttpClient } from '@angular/common/http';
  * Ionic pages and navigation.
  */
 var ResultsPage = /** @class */ (function () {
-    function ResultsPage(navCtrl, navParams, http) {
+    function ResultsPage(navCtrl, navParams, searchProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.http = http;
+        this.searchProvider = searchProvider;
         this.resultList = [];
     }
     ResultsPage.prototype.ngOnInit = function () {
-        this.getData();
+        this.buildList();
     };
-    ResultsPage.prototype.getData = function () {
+    ResultsPage.prototype.buildList = function () {
+        // let url = "build/dummydata.json";
+        // let data: Observable<any> = this.http.get(url)
+        // data.subscribe(result =>{
+        //   this.resultList = result;
+        //   console.log(result);
+        // })
         var _this = this;
-        var url = "build/dummydata.json";
-        var data = this.http.get(url);
-        data.subscribe(function (result) {
-            _this.resultList = result;
-            console.log(result);
+        this.searchProvider.getData().subscribe(function (event) {
+            switch (event.type) {
+                case HttpEventType.Sent:
+                    console.log('Request sent!');
+                    break;
+                case HttpEventType.ResponseHeader:
+                    console.log('Response Header Received!');
+                    break;
+                case HttpEventType.DownloadProgress:
+                    var kbLoaded = Math.round(event.loaded / 1024);
+                    console.log("Download in progress! " + kbLoaded + "KB loaded");
+                    break;
+                case HttpEventType.Response:
+                    console.log('Response Receive!!!');
+                    _this.resultList = event.body;
+            }
         });
     };
     ResultsPage.prototype.ionViewDidLoad = function () {
@@ -44,7 +62,7 @@ var ResultsPage = /** @class */ (function () {
             selector: 'page-results',
             templateUrl: 'results.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, HttpClient])
+        __metadata("design:paramtypes", [NavController, NavParams, SearchProvider])
     ], ResultsPage);
     return ResultsPage;
 }());

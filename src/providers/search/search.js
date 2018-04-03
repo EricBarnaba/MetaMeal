@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /*
   Generated class for the SearchProvider provider.
@@ -18,10 +18,19 @@ import { Injectable } from '@angular/core';
 var SearchProvider = /** @class */ (function () {
     function SearchProvider(http) {
         this.http = http;
-        console.log('Hello SearchProvider Provider');
+        this.getUrl = 'https://jsonplaceholder.typicode.com/restaurants';
+        this.postUrl = 'https://jsonplaceholder.typicode.com/search';
+        //console.log('Hello SearchProvider Provider');
     }
-    SearchProvider.prototype.henlo = function () {
-        return 'henlo';
+    SearchProvider.prototype.getData = function () {
+        var req = new HttpRequest('GET', this.getUrl, {
+            reportProgress: true
+        });
+        return this.http.request(req);
+    };
+    SearchProvider.prototype.postSearch = function (location, cuisine, radius) {
+        //let json = new SearchObject(location,cuisine,radius);
+        return this.http.post(this.postUrl, { location: location, cuisine: cuisine, radius: radius });
     };
     SearchProvider = __decorate([
         Injectable(),
