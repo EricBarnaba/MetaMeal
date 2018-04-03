@@ -22,7 +22,7 @@ export class SearchProvider {
   private static lastSearch: number;
 
   constructor(private http: HttpClient) {
-    //console.log('Hello SearchProvider Provider');
+    
   }
 
   getData(){
@@ -33,7 +33,7 @@ export class SearchProvider {
   }
 
   postSearch(location: string, cuisine: string, radius: number) {
-    //let json = new SearchObject(location,cuisine,radius);
+    
     let id: number = SearchProvider.lastSearch;
     SearchProvider.lastSearch++;
     return this.http.post(this.postUrl, {id,location,cuisine,radius});
@@ -43,21 +43,12 @@ export class SearchProvider {
     return this.http.put(this.postUrl, {id,location,cuisine,radius});
   }
 
-   clearSearch() {
-     return this.http.delete(this.postUrl)
-   }
+  //  clearSearch() {
+  //    return this.http.delete(this.postUrl)
+  //  }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   if(error.error instanceof ErrorEvent) {
-  //     console.error('Something weird is going on: ', error.error.message);
-  //   }
-  //   else{
-  //     console.error(`Server returned code ${error.status},` + `body was: ${error.error}`);
-  //   }
-  //   return new ErrorObservable('Something bad happened');
-
-  // }
 
 }
+
 
 

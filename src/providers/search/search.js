@@ -20,8 +20,8 @@ var SearchProvider = /** @class */ (function () {
         this.http = http;
         this.getUrl = 'https://jsonplaceholder.typicode.com/restaurants';
         this.postUrl = 'https://jsonplaceholder.typicode.com/search';
-        //console.log('Hello SearchProvider Provider');
     }
+    SearchProvider_1 = SearchProvider;
     SearchProvider.prototype.getData = function () {
         var req = new HttpRequest('GET', this.getUrl, {
             reportProgress: true
@@ -29,18 +29,19 @@ var SearchProvider = /** @class */ (function () {
         return this.http.request(req);
     };
     SearchProvider.prototype.postSearch = function (location, cuisine, radius) {
-        //let json = new SearchObject(location,cuisine,radius);
-        // let id: number = this.lastSearch;
-        return this.http.post(this.postUrl, { location: location, cuisine: cuisine, radius: radius });
+        var id = SearchProvider_1.lastSearch;
+        SearchProvider_1.lastSearch++;
+        return this.http.post(this.postUrl, { id: id, location: location, cuisine: cuisine, radius: radius });
     };
-    SearchProvider.prototype.updateSearch = function (location, cuisine, radius) {
-        return this.http.put(this.postUrl, { location: location, cuisine: cuisine, radius: radius });
+    SearchProvider.prototype.updateSearch = function (id, location, cuisine, radius) {
+        return this.http.put(this.postUrl, { id: id, location: location, cuisine: cuisine, radius: radius });
     };
-    SearchProvider = __decorate([
+    SearchProvider = SearchProvider_1 = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [HttpClient])
     ], SearchProvider);
     return SearchProvider;
+    var SearchProvider_1;
 }());
 export { SearchProvider };
 //# sourceMappingURL=search.js.map
