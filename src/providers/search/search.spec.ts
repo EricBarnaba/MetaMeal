@@ -45,6 +45,7 @@ describe('The SearchProvider\'s', () => {
                     expect(data.location).toBe('Wilmington');
                     expect(data.cuisine).toBe('Neo-American');
                     expect(data.radius).toBe(99);
+                    
                 })
     
                 const mockReq = httpMock.expectOne(searchProvider.postUrl);

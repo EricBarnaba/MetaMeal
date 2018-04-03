@@ -19,6 +19,7 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 export class SearchProvider {
   getUrl = 'https://jsonplaceholder.typicode.com/restaurants';
   postUrl = 'https://jsonplaceholder.typicode.com/search';
+  private static lastSearch: number;
 
   constructor(private http: HttpClient) {
     //console.log('Hello SearchProvider Provider');
@@ -33,9 +34,18 @@ export class SearchProvider {
 
   postSearch(location: string, cuisine: string, radius: number) {
     //let json = new SearchObject(location,cuisine,radius);
-    return this.http.post(this.postUrl, {location,cuisine,radius});
-
+    let id: number = SearchProvider.lastSearch;
+    SearchProvider.lastSearch++;
+    return this.http.post(this.postUrl, {id,location,cuisine,radius});
   }
+
+  updateSearch(id:number, location: string, cuisine: string, radius: number){
+    return this.http.put(this.postUrl, {id,location,cuisine,radius});
+  }
+
+   clearSearch() {
+     return this.http.delete(this.postUrl)
+   }
 
   // private handleError(error: HttpErrorResponse) {
   //   if(error.error instanceof ErrorEvent) {

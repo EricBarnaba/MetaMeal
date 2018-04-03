@@ -30,7 +30,11 @@ var SearchProvider = /** @class */ (function () {
     };
     SearchProvider.prototype.postSearch = function (location, cuisine, radius) {
         //let json = new SearchObject(location,cuisine,radius);
+        // let id: number = this.lastSearch;
         return this.http.post(this.postUrl, { location: location, cuisine: cuisine, radius: radius });
+    };
+    SearchProvider.prototype.updateSearch = function (location, cuisine, radius) {
+        return this.http.put(this.postUrl, { location: location, cuisine: cuisine, radius: radius });
     };
     SearchProvider = __decorate([
         Injectable(),
